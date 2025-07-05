@@ -1,10 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import dbConnect from "./src/db/index.js";
 
 const app = express();
-
-dotenv.config();
 
 app.use(
   cors({
@@ -16,10 +15,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded());
 
+// connect to database
+dbConnect();
+
 //routes import
-import userRouter from "./routes/user.routes.js";
+import userRouter from "./src/routes/user.routes.js";
 
 //routes declaration
-app.use("/api/v1/users", userRouter);
+app.use("/api/users", userRouter);
 
 export { app };
